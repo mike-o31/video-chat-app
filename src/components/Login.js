@@ -1,41 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
-
-const socket = io('http://localhost:3000');
+import React, { useContext } from 'react';
+import { SocketContext } from '../Context';
 
 const Login = () => {
-	const [input, setInput] = useState('');
-	const [username, setUsername] = useState('');
-	const [userID, setUserID] = useState('');
-	const [user, setUser] = useState({});
-	const [inputDisabled, setInputDisabled] = useState(false);
-
-	socket.on('socketid', (id) => {
-		setUserID(id);
-	});
-
-	const handleLogin = (e) => {
-		e.preventDefault();
-
-		if (!input) {
-			alert('You need a name...');
-			console.log('No Username');
-		} else {
-			// setInputDisabled(true);
-			setUsername(input);
-			console.log(username);
-			setUser({
-				userID: userID,
-				username: username,
-			});
-		}
-		setInput('');
-
-		socket.emit('user', { username, userID });
-	};
+	const { handleLogin, myID, username, input, setInput, inputDisabled } =
+		useContext(SocketContext);
 
 	return (
 		<div style={{ border: '1px solid black' }}>
+			<h2>My name: {username}</h2>
+			<h2>My ID: {myID}</h2>
 			<form onSubmit={handleLogin}>
 				<input
 					type='text'

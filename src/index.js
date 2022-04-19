@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import adapter from 'webrtc-adapter';
+import { Context } from './Context';
 
 ReactDOM.render(
-	<React.StrictMode>
+	<Context>
 		<App />
-	</React.StrictMode>,
+	</Context>,
 	document.getElementById('root')
 );

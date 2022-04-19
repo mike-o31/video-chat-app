@@ -10,6 +10,7 @@ const io = socketio(server, {
 		method: ['GET', 'POST'],
 	},
 });
+const users = [];
 
 app.use(cors());
 
